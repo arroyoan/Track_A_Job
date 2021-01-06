@@ -57,9 +57,72 @@ const createJob = asyncHandler(async (req, res) => {
   res.status(201).json(createdJob)
 })
 
+// @desc    Update a job app
+// @route   PUT /api/jobs/:id
+// @access  Private
+const updateJob = asyncHandler(async (req, res) => {
+  const job = await Job.findById(req.params.id)
+  const {
+    jobTitle,
+    jobDescription,
+    companyJobId,
+    companyName,
+    jobUrl,
+    jobCity,
+    jobState,
+    jobCountry,
+    isImportant,
+    hasApplied,
+    heardBack,
+    haveInterviewed,
+    haveOffer
+  } = req.body
+
+  if (job) {
+    // assign new values or use old values if no new values
+    job.jobTitle = jobTitle || job.jobTitle
+    job.jobDescription = jobDescription || job.jobDescription
+    job.companyJobId = companyJobId || job.companyJobId
+    job.companyName = companyName || job.companyName
+    job.jobUrl = jobUrl || job.jobUrl
+    job.jobCity = jobCity || job.jobCity
+    job.jobState = jobState || job.jobState
+    job.jobCountry = jobCountry || job.jobCountry
+    job.isImportant = isImportant || job.isImportant
+    job.hasApplied = hasApplied || job.hasApplied
+    job.heardBack = heardBack || job.heardBack
+    job.haveInterviewed = haveInterviewed || job.haveInterviewed
+    job.haveOffer = haveOffer || job.haveOffer
+
+    // update the job in the database
+    const updatedJob = await job.save()
+
+    res.json({
+      _id: updatedJob._id,
+      jobTitle: updatedJob.jobTitle,
+      jobDescription: updatedJob.jobDescription,
+      companyJobId: updatedJob.companyJobId,
+      companyName: updatedJob.companyName,
+      jobUrl: updatedJob.jobUrl,
+      jobCity: updatedJob.jobCity,
+      jobState: updatedJob.jobState,
+      jobCountry: updatedJob.jobCountry,
+      isImportant: updatedJob.isImportant,
+      hasApplied: updatedJob.hasApplied,
+      heardBack: updatedJob.heardBack,
+      haveInterviewed: updatedJob.haveInterviewed,
+      haveOffer: updatedJob.haveOffer
+    })
+  } else {
+    res.status(404)
+    throw new Error('Job could not be found')
+  }
+})
+
 export {
   getJobs,
   getUserJobs,
   createJob,
-  getSingleJob
+  getSingleJob,
+  updateJob
 }

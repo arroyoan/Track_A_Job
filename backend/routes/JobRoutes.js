@@ -3,7 +3,8 @@ import {
   getJobs,
   createJob,
   getUserJobs,
-  getSingleJob
+  getSingleJob,
+  updateJob
 } from '../controllers/JobController.js'
 
 import { protect } from '../middleware/authMiddleware.js'
@@ -18,6 +19,7 @@ router.route('/')
 
 router.route('/:id')
   .get(protect, getSingleJob)
+  .put(protect, updateJob)
 
 router.route('/myjobs')
   .get(protect, getUserJobs)

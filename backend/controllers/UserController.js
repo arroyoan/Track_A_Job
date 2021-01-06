@@ -39,6 +39,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     // assigns new value if there or keeps old if not
     user.username = req.body.username || user.username
     user.email = req.body.email || user.email
+
     // must check if submitted new password and do not want to assign user.password
     // this would change the users password to be the hash value and we dont want that here haha
     if (req.body.password) {
