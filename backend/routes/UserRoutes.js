@@ -4,7 +4,8 @@ import {
   loginUser,
   getSingleUser,
   getAllUsers,
-  updateProfile
+  updateProfile,
+  deleteUser
 } from '../controllers/UserController.js'
 
 import { protect, admin } from '../middleware/authMiddleware.js'
@@ -13,6 +14,9 @@ const router = express.Router()
 
 router.route('/')
   .get(protect, admin, getAllUsers)
+
+router.route('/:id')
+  .delete(protect, deleteUser)
 
 // this route will be protected but middle ware not made yet
 router.route('/profile')

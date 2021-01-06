@@ -58,6 +58,23 @@ const updateProfile = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Delete a user
+// @route   DELETE /api/users/:id
+// @access  Private
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    await user.remove()
+    res.json({ message: 'User removed' })
+
+  } else {
+    res.status(404)
+    throw new Error('User does not exist')
+  }
+
+})
+
 // @desc    Register a User
 // @route   POST /api/users/register
 // @access  Public
@@ -119,5 +136,6 @@ export {
   loginUser,
   getSingleUser,
   getAllUsers,
-  updateProfile
+  updateProfile,
+  deleteUser
 }
