@@ -99,6 +99,7 @@ const updateJob = asyncHandler(async (req, res) => {
 
     res.json({
       _id: updatedJob._id,
+      user: req.user._id,
       jobTitle: updatedJob.jobTitle,
       jobDescription: updatedJob.jobDescription,
       companyJobId: updatedJob.companyJobId,
