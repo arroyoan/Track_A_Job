@@ -120,10 +120,28 @@ const updateJob = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Delete user from db
+// @route   DELETE /api/jobs/:id
+// @access  Private
+const deleteJob = asyncHandler(async (req, res) => {
+  const job = await Job.findById(req.params.id)
+
+  if (job) {
+    await job.remove()
+    res.json({
+      message: 'Job Removed'
+    })
+  } else {
+    res.status(404)
+    throw new Error('Job not found')
+  }
+})
+
 export {
   getJobs,
   getUserJobs,
   createJob,
   getSingleJob,
-  updateJob
+  updateJob,
+  deleteJob
 }

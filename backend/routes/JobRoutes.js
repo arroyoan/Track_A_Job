@@ -4,7 +4,8 @@ import {
   createJob,
   getUserJobs,
   getSingleJob,
-  updateJob
+  updateJob,
+  deleteJob
 } from '../controllers/JobController.js'
 
 import { protect } from '../middleware/authMiddleware.js'
@@ -20,6 +21,7 @@ router.route('/')
 router.route('/:id')
   .get(protect, getSingleJob)
   .put(protect, updateJob)
+  .delete(protect, deleteJob)
 
 router.route('/myjobs')
   .get(protect, getUserJobs)
