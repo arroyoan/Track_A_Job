@@ -8,16 +8,23 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // reducers to be imported
 import { } from './reducers/JobReducers'
-import { } from './reducers/UserReducers'
+import { userLoginReducer } from './reducers/UserReducers'
 
 // reducers to combined here
 const reducer = combineReducers({
   // Below is an example
   // jobDelete:JobDeleteReducer
+  userLogin: userLoginReducer,
 })
 
+// Local storage things
+const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
+
 // make initial state from local storage
-let initialState = {}
+let initialState = {
+  userLogin: { userInfo: userInfoFromStorage }
+}
 
 // any middle needed goes here
 let middleware = [thunk]

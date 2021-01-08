@@ -1,23 +1,66 @@
-import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-const LoginScreen = () => {
+import FormContainer from '../components/FormContainer'
+import { login } from '../actions/UserActions'
+
+const LoginScreen = ({ history }) => {
+  const dispatch = useDispatch()
+
+  // setting up useSTate hook
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  // Getting state from redux 
+  const userLogin = useSelector(state => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+
+  // setting up useEffect hook
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/')
+    }
+  }, [userInfo, history])
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+    dispatch(login(email, password))
+  }
+
   return (
-    <div>
-      <Form>
+    <FormContainer>
+      <h1>Sign In</h1>
+      {/*error check*/error && <h1>{error}</h1>}
+      {/*loading check*/loading && <h1>Loading....</h1>}
+      <Form className='py-3' onSubmit={onSubmitHandler}>
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
-          <Form.Control type="email" placeholder='Enter Email' />
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            placeholder='Enter Email' />
         </Form.Group>
 
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder='Enter Email' />
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Enter Password' />
         </Form.Group>
 
-        <Button className='btn' type="submit" block>Sign In</Button>
+        <Button className='btn btn-dark' type="submit" block>Sign In</Button>
       </Form>
-    </div>
+      <Row className='py-3'>
+        <Col>
+          New Customer? <Link to='/register'>Register</Link>
+        </Col>
+      </Row>
+    </FormContainer >
   )
 }
 
