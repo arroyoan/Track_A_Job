@@ -14,7 +14,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to='/signin'>
+              <LinkContainer to='/login'>
                 <Nav.Link>Sign In</Nav.Link>
               </LinkContainer>
             </Nav>

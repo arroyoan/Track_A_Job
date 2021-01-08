@@ -13,7 +13,7 @@ function App() {
       <Header />
       <main>
         <Container>
-          {/* <Route /> */}
+          {/* Routes */}
           <Route path="/register" component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/" render={() => (<h1>WELCOME TO THE WEBSITE BITCHHHHH</h1>)} exact />

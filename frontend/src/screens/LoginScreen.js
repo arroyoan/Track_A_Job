@@ -15,7 +15,7 @@ const LoginScreen = () => {
           <Form.Control type="password" placeholder='Enter Email' />
         </Form.Group>
 
-        <Button className='btn' type="submit" block>Login</Button>
+        <Button className='btn' type="submit" block>Sign In</Button>
       </Form>
     </div>
   )
