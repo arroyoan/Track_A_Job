@@ -8,13 +8,17 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // reducers to be imported
 import { } from './reducers/JobReducers'
-import { userLoginReducer } from './reducers/UserReducers'
+import {
+  userLoginReducer,
+  userRegisterReducer
+} from './reducers/UserReducers'
 
 // reducers to combined here
 const reducer = combineReducers({
   // Below is an example
   // jobDelete:JobDeleteReducer
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 })
 
 // Local storage things
