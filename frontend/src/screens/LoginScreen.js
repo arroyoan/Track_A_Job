@@ -4,6 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import FormContainer from '../components/FormContainer'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 import { login } from '../actions/UserActions'
 
 const LoginScreen = ({ history }) => {
@@ -32,8 +34,8 @@ const LoginScreen = ({ history }) => {
   return (
     <FormContainer>
       <h1>Sign In</h1>
-      {/*error check*/error && <h1>{error}</h1>}
-      {/*loading check*/loading && <h1>Loading....</h1>}
+      {error && <Message variant='danger'>{error}</Message>}
+      {loading && <Loader />}
       <Form className='py-3' onSubmit={onSubmitHandler}>
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>

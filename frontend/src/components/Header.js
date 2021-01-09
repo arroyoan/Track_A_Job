@@ -1,8 +1,22 @@
 import React from 'react'
-import { Navbar, Nav, Container } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
+import { USER_LOGOUT } from '../constants/UserConstants'
+
 const Header = () => {
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+  const onLogout = () => {
+    dispatch({
+      type: USER_LOGOUT
+    })
+  }
+
   return (
     <header>
       <Navbar collapseOnSelect expand="lg" bg="primary" variant='dark' >
@@ -14,9 +28,20 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to='/login'>
-                <Nav.Link>Sign In</Nav.Link>
-              </LinkContainer>
+              {userInfo ?
+                (
+                  <NavDropdown title={userInfo.username} id='nav-dropdown'>
+                    <LinkContainer to='/profile'>
+                      <NavDropdown.Item>My Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <LinkContainer to='/login'>
+                    <Nav.Link>Sign In</Nav.Link>
+                  </LinkContainer>
+                )}
+
             </Nav>
           </Navbar.Collapse>
         </Container>

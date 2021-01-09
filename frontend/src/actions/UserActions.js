@@ -7,7 +7,6 @@ import {
 import axios from 'axios'
 
 export const login = (email, password) => (async (dispatch) => {
-  console.log('it is in the login actions')
   try {
     dispatch({
       type: USER_LOGIN_REQUEST
@@ -29,6 +28,7 @@ export const login = (email, password) => (async (dispatch) => {
     localStorage.setItem('userInfo', JSON.stringify(data))
 
   } catch (error) {
+    console.error(error);
     dispatch({
       type: USER_LOGIN_FAIL,
       payload: error.response && error.response.data.message
