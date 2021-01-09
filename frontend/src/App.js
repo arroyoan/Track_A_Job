@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 // screens being imported
 import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
+import HomeScreen from './screens/HomeScreen'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           {/* Routes */}
           <Route path="/register" component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
-          <Route path="/" render={() => (<h1>WELCOME TO THE WEBSITE BITCHHHHH</h1>)} exact />
+          <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>
       <Footer />

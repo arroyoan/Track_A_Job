@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-import { USER_LOGOUT } from '../constants/UserConstants'
+import { logout } from '../actions/UserActions'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -12,9 +12,7 @@ const Header = () => {
   const { userInfo } = userLogin
 
   const onLogout = () => {
-    dispatch({
-      type: USER_LOGOUT
-    })
+    dispatch(logout())
   }
 
   return (
