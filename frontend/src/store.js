@@ -7,7 +7,9 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // reducers to be imported
-import { } from './reducers/JobReducers'
+import {
+  userJobsReducer
+} from './reducers/JobReducers'
 import {
   userLoginReducer,
   userRegisterReducer
@@ -19,6 +21,7 @@ const reducer = combineReducers({
   // jobDelete:JobDeleteReducer
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userJobs: userJobsReducer,
 })
 
 // Local storage things
