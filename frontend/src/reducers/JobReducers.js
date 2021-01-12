@@ -4,12 +4,12 @@ import {
   JOB_USERS_SUCCESS
 } from '../constants/JobConstants'
 
-export const userJobsReducer = (state = {}, action) => {
+export const userJobsReducer = (state = { jobs: [] }, action) => {
   switch (action.type) {
     case JOB_USERS_REQUEST:
       return { loading: true }
     case JOB_USERS_SUCCESS:
-      return { loading: false, userJobs: action.payload }
+      return { loading: false, jobs: action.payload }
     case JOB_USERS_FAIL:
       return { loading: false, error: action.payload }
     default:

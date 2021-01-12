@@ -6,7 +6,7 @@ import asyncHandler from 'express-async-handler'
 // @access  Private/Admin
 const getJobs = asyncHandler(async (req, res) => {
   const jobs = await Job.find({}).populate('user', 'id username')
-  res.json({ jobs })
+  res.json(jobs)
 })
 
 // @desc    Get a users Jobs
@@ -14,7 +14,7 @@ const getJobs = asyncHandler(async (req, res) => {
 // @access  Private
 const getUserJobs = asyncHandler(async (req, res) => {
   const jobs = await Job.find({ user: req.user._id })
-  res.json({ jobs })
+  res.json(jobs)
 })
 
 // @desc    GET a single job

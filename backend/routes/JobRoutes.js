@@ -18,12 +18,14 @@ router.route('/')
   .post(protect, createJob)
   .get(protect, getJobs)
 
+router.route('/myjobs')
+  .get(protect, getUserJobs)
+
 router.route('/:id')
   .get(protect, getSingleJob)
   .put(protect, updateJob)
   .delete(protect, deleteJob)
 
-router.route('/myjobs')
-  .get(protect, getUserJobs)
+
 
 export default router

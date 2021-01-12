@@ -13,7 +13,6 @@ export const getUserJobs = () => async (dispatch, getState) => {
     })
 
     const { userLogin: { userInfo } } = getState()
-
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`
@@ -21,7 +20,6 @@ export const getUserJobs = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get('/api/jobs/myjobs', config)
-
     dispatch({
       type: JOB_USERS_SUCCESS,
       payload: data
