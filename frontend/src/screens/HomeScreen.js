@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -32,8 +34,8 @@ const HomeScreen = ({ history, location }) => {
   return (
     <>
       <div className='py-3' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h4 >Your Applications</h4>
-        <Button className='btn'>+ New App</Button>
+        <h4>Your Applications</h4>
+        <Link to={`/addjob`}><Button className='btn'>+ New App</Button></Link>
       </div>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
@@ -44,51 +46,57 @@ const HomeScreen = ({ history, location }) => {
           </div>
 
         ) : (
-          <Table striped hover bordered >
-            <thead>
-              <tr className='text-center'>
-                <th>Job Title</th>
-                <th>Company Name</th>
-                <th>Applied</th>
-                <th>Interviewed</th>
-                <th>Offer</th>
-                <th>Job Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                jobs.map((job) => {
-                  return (
-                    <tr key={job._id} className='text-center'>
-                      <td>{job.jobTitle}</td>
-                      <td>{job.companyName}</td>
-                      <td className='align-middle'>
-                        {job.hasApplied ? (
-                          <i className='fas fa-check' style={{ color: 'green' }}></i>
-                        ) : (
-                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                          )}
-                      </td>
-                      <td className='align-middle text-center'>
-                        {job.hasInterviewed ? (
-                          <i className='fas fa-check' style={{ color: 'green' }}></i>
-                        ) : (
-                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                          )}
-                      </td>
-                      <td className='align-middle text-center'>
-                        {job.hasoffer ? (
-                          <i className='fas fa-check' style={{ color: 'green' }}></i>
-                        ) : (
-                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                          )}
-                      </td>
-                      <td>Details</td>
-                    </tr>)
-                })
-              }
-            </tbody>
-          </Table>
+          <>
+            <Table striped hover bordered >
+              <thead style={{ background: '#eb6864', color: 'white' }}>
+                <tr className='text-center'>
+                  <th> <strong> Job Title</strong></th>
+                  <th><strong>Company Name</strong></th>
+                  <th><strong>Applied</strong></th>
+                  <th><strong>Interviewed</strong></th>
+                  <th><strong>Offer</strong></th>
+                  <th><strong>Job Details</strong></th>
+                </tr>
+              </thead>
+              <tbody style={{ background: 'white' }}>
+                {
+                  jobs.map((job) => {
+                    return (
+                      <tr key={job._id} className='text-center'>
+                        <td>{job.jobTitle}</td>
+                        <td>{job.companyName}</td>
+                        <td className='align-middle'>
+                          {job.hasApplied ? (
+                            <i className='fas fa-check' style={{ color: 'green' }}></i>
+                          ) : (
+                              <i className='fas fa-times' style={{ color: 'red' }}></i>
+                            )}
+                        </td>
+                        <td className='align-middle text-center'>
+                          {job.hasInterviewed ? (
+                            <i className='fas fa-check' style={{ color: 'green' }}></i>
+                          ) : (
+                              <i className='fas fa-times' style={{ color: 'red' }}></i>
+                            )}
+                        </td>
+                        <td className='align-middle text-center'>
+                          {job.hasoffer ? (
+                            <i className='fas fa-check' style={{ color: 'green' }}></i>
+                          ) : (
+                              <i className='fas fa-times' style={{ color: 'red' }}></i>
+                            )}
+                        </td>
+                        <td className='align-middle text-center'>
+                          <Link to={`/jobs/${job._id}`} style={{ color: '#369' }}>Details</Link>
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </Table>
+            <h1 className='align-middle text-center'>Pagination</h1>
+          </>
         )}
     </>
   )

@@ -8,7 +8,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // reducers to be imported
 import {
-  userJobsReducer
+  userJobsReducer,
+  createJobReducer
 } from './reducers/JobReducers'
 import {
   userLoginReducer,
@@ -17,11 +18,10 @@ import {
 
 // reducers to combined here
 const reducer = combineReducers({
-  // Below is an example
-  // jobDelete:JobDeleteReducer
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userJobs: userJobsReducer,
+  createJob: createJobReducer,
 })
 
 // Local storage things

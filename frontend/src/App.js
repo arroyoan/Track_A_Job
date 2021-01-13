@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
+import AddJobScreen from './screens/AddJobScreen'
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           {/* Routes */}
           <Route path="/register" component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
-          <Route path="/" component={HomeScreen} exact />
+          <Route path="/addjob" component={AddJobScreen} />
+          <Route path="/myjobs" component={HomeScreen} exact />
+          <Route exact path='/'><Redirect to='/myjobs' /></Route>
         </Container>
       </main>
       <Footer />

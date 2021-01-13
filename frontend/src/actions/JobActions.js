@@ -1,7 +1,10 @@
 import {
   JOB_USERS_SUCCESS,
   JOB_USERS_REQUEST,
-  JOB_USERS_FAIL
+  JOB_USERS_FAIL,
+  JOB_CREATE_FAIL,
+  JOB_CREATE_SUCCESS,
+  JOB_CREATE_REQUEST
 } from '../constants/JobConstants'
 
 import axios from 'axios'
@@ -29,6 +32,37 @@ export const getUserJobs = () => async (dispatch, getState) => {
     dispatch({
       type: JOB_USERS_FAIL,
       error: error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    })
+  }
+}
+
+export const createJob = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: JOB_CREATE_REQUEST
+    })
+
+    const { userLogin: { userInfo } } = getState
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`
+      }
+    }
+
+    await axios.post('/api/jobs/', {}, config)
+
+    dispatch({
+      type: JOB_CREATE_SUCCESS
+    })
+
+  } catch (error) {
+    dispatch({
+      type: JOB_CREATE_FAIL,
+      payload: error.response && error.response.data.message
         ? error.response.data.message
         : error.message
     })
