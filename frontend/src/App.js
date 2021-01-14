@@ -8,6 +8,7 @@ import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
 import AddJobScreen from './screens/AddJobScreen'
+import JobDetailsScreen from './screens/JobDetailsScreen'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/addjob" component={AddJobScreen} />
+          <Route path="/myjobs/:id" component={JobDetailsScreen} exact />
           <Route path="/myjobs" component={HomeScreen} exact />
           <Route exact path='/'><Redirect to='/myjobs' /></Route>
         </Container>

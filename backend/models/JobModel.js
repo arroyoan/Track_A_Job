@@ -8,7 +8,6 @@ const JobSchema = new mongoose.Schema({
   jobDescription: {
     type: String,
     required: [true, 'Please add a brief description for the position'],
-    maxlength: [250, 'Job Description must be at most 250 characters']
   },
   companyJobId: {
     type: String,

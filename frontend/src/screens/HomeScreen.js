@@ -39,7 +39,7 @@ const HomeScreen = ({ history, location }) => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
 
-      {!jobs || jobs.length == 0 ?
+      {!jobs || jobs.length === 0 ?
         (
           <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', paddingTop: '15px' }}>
             <h1>You have no job applications!</h1>
