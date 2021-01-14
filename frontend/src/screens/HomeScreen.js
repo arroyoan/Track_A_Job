@@ -67,7 +67,7 @@ const HomeScreen = ({ history, location }) => {
                         <td>{job.jobTitle}</td>
                         <td>{job.companyJobId}</td>
                         <td>{job.companyName}</td>
-                        <td className='align-middle'>
+                        <td className='align-middle text-center'>
                           {job.hasApplied ? (
                             <i className='fas fa-check' style={{ color: 'green' }}></i>
                           ) : (
