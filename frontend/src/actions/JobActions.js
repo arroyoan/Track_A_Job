@@ -38,13 +38,13 @@ export const getUserJobs = () => async (dispatch, getState) => {
   }
 }
 
-export const createJob = () => async (dispatch, getState) => {
+export const createJob = (jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry) => async (dispatch, getState) => {
   try {
     dispatch({
       type: JOB_CREATE_REQUEST
     })
 
-    const { userLogin: { userInfo } } = getState
+    const { userLogin: { userInfo } } = getState()
 
     const config = {
       headers: {
@@ -53,7 +53,16 @@ export const createJob = () => async (dispatch, getState) => {
       }
     }
 
-    await axios.post('/api/jobs/', {}, config)
+    await axios.post('/api/jobs/', {
+      jobTitle,
+      jobUrl,
+      jobDescription,
+      companyJobId,
+      companyName,
+      jobCity,
+      jobState,
+      jobCountry
+    }, config)
 
     dispatch({
       type: JOB_CREATE_SUCCESS

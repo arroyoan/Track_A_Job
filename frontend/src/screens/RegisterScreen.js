@@ -43,11 +43,13 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <div className='py-3' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>Sign Up</h1>
+      </div>
       {loading && <Loader />}
       {error && <Message variant='danger'>{error}</Message>}
       {message && <Message variant='danger'>{message}</Message>}
-      <Form className='py-3' onSubmit={submitHandler} >
+      <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white' }} onSubmit={submitHandler} >
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -76,7 +78,7 @@ const RegisterScreen = ({ history }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <Form.Text muted className='px-2'>Passwords must be at least 8 characters long</Form.Text>
+          <Form.Text className='px-2' style={{ color: 'white' }}>Passwords must be at least 8 characters long</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
@@ -91,7 +93,7 @@ const RegisterScreen = ({ history }) => {
 
         <Button className='btn btn-dark' type="submit" block>Register</Button>
       </Form>
-      <Row className='py-3'>
+      <Row className='py-3 text-center'>
         <Col>
           Already have an account? <Link to='/login'>Sign In</Link>
         </Col>

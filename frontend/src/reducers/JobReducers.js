@@ -20,7 +20,7 @@ export const userJobsReducer = (state = { jobs: [] }, action) => {
   }
 }
 
-export const createJobReducer = (state = {}, action) => {
+export const createJobReducer = (state = { success: false }, action) => {
   switch (action.type) {
     case JOB_CREATE_REQUEST:
       return { loading: true }

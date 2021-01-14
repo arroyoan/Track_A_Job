@@ -33,10 +33,12 @@ const LoginScreen = ({ history }) => {
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <div className='py-3' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1>Sign In</h1>
+      </div>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
-      <Form className='py-3' onSubmit={onSubmitHandler}>
+      <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white' }} onSubmit={onSubmitHandler}>
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -57,7 +59,7 @@ const LoginScreen = ({ history }) => {
 
         <Button className='btn btn-dark' type="submit" block>Sign In</Button>
       </Form>
-      <Row className='py-3'>
+      <Row className='py-3 text-center'>
         <Col>
           New Customer? <Link to='/register'>Register</Link>
         </Col>

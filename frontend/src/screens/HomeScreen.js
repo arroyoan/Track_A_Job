@@ -23,11 +23,10 @@ const HomeScreen = ({ history, location }) => {
     if (userInfo) {
       dispatch(getUserJobs())
     } else {
-      //gonna redirect to login page
-      console.log('inm homescreen elase')
+      history.push('/login')
     }
 
-  }, [dispatch, userInfo])
+  }, [dispatch, userInfo, history])
 
   // local methods
 
@@ -39,23 +38,25 @@ const HomeScreen = ({ history, location }) => {
       </div>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
-      {!jobs ?
+
+      {!jobs || jobs.length == 0 ?
         (
-          <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', paddingTop: '15px' }}>
             <h1>You have no job applications!</h1>
           </div>
 
         ) : (
           <>
-            <Table striped hover bordered >
+            <Table striped hover bordered responsive>
               <thead style={{ background: '#eb6864', color: 'white' }}>
                 <tr className='text-center'>
-                  <th> <strong> Job Title</strong></th>
-                  <th><strong>Company Name</strong></th>
+                  <th> <strong>Job</strong></th>
+                  <th> <strong>Job Id</strong></th>
+                  <th><strong>Company</strong></th>
                   <th><strong>Applied</strong></th>
                   <th><strong>Interviewed</strong></th>
                   <th><strong>Offer</strong></th>
-                  <th><strong>Job Details</strong></th>
+                  <th><strong>Details</strong></th>
                 </tr>
               </thead>
               <tbody style={{ background: 'white' }}>
@@ -64,6 +65,7 @@ const HomeScreen = ({ history, location }) => {
                     return (
                       <tr key={job._id} className='text-center'>
                         <td>{job.jobTitle}</td>
+                        <td>{job.companyJobId}</td>
                         <td>{job.companyName}</td>
                         <td className='align-middle'>
                           {job.hasApplied ? (
@@ -87,7 +89,7 @@ const HomeScreen = ({ history, location }) => {
                             )}
                         </td>
                         <td className='align-middle text-center'>
-                          <Link to={`/jobs/${job._id}`} style={{ color: '#369' }}>Details</Link>
+                          <Link to={`/myjobs/${job._id}`} style={{ color: '#369' }}>Details</Link>
                         </td>
                       </tr>
                     )
