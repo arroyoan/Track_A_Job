@@ -27,25 +27,21 @@ const AddJobScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   const createJob = useSelector(state => state.createJob)
-  const { loading, error, success } = createJob
+  const { loading, error } = createJob
 
   // useEffect hook 
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
     }
-
-    if (success) {
-      history.push('/myjobs')
-    }
-
-  }, [history, userInfo, success])
+  }, [history, userInfo])
 
   // local methods if needed
   const onSubmitHandler = (e) => {
     e.preventDefault()
     // dispatch createJob action here
     dispatch(newJob(jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry))
+    history.push('/myjobs')
   }
 
   return (

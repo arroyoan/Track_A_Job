@@ -43,13 +43,13 @@ const RegisterScreen = ({ history }) => {
 
   return (
     <FormContainer>
-      <div className='py-3' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className='py-2' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Sign Up</h1>
       </div>
       {loading && <Loader />}
       {error && <Message variant='danger'>{error}</Message>}
       {message && <Message variant='danger'>{message}</Message>}
-      <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white' }} onSubmit={submitHandler} >
+      <Form className='py-3 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white' }} onSubmit={submitHandler} >
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control

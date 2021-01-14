@@ -1,5 +1,19 @@
-
-
 main {
   min-height: 80vh;
 }
+
+.appButton { 
+  font-size: 14px;
+  background: #eb6864;
+  color: white;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.appButton:hover{
+  box-shadow: 0 0 1px #af4b48;
+  color:white;
+  text-decoration: none;
+  font-size: 14.5px;
+}
+

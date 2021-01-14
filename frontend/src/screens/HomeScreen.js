@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Table, Button } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -32,9 +32,9 @@ const HomeScreen = ({ history, location }) => {
 
   return (
     <>
-      <div className='py-3' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className='py-3 pr-1' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
         <h4>Your Applications</h4>
-        <Link to={`/addjob`}><Button className='btn'>+ New App</Button></Link>
+        <Link className='appButton' to='/addjob' >+ New App</Link>
       </div>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
