@@ -32,7 +32,10 @@ const JobDetailsScreen = ({ history, match }) => {
   }, [userInfo, history, dispatch, jobId])
 
   // local methods
-  // method to mark job as important
+
+  // const markImportantHandler = ()=>{
+
+  // }
 
   return (
     <>
@@ -53,6 +56,7 @@ const JobDetailsScreen = ({ history, match }) => {
           </Row>
           <Row>
             <Col className='pl-4'>
+
               {/* this is the header for details */}
               <div className="edit pb-2" style={{ display: 'flex', width: '115px' }}>
                 <h2 className='pr-2' style={{ color: '#eb6864' }}>Details</h2>
@@ -82,8 +86,12 @@ const JobDetailsScreen = ({ history, match }) => {
 
           <Row>
             <Col className='pl-4'>
-              <h2 className='pb-3' style={{ color: '#eb6864' }}>Your Progress</h2>
-              <Table >
+              <div className="edit pb-2" style={{ display: 'flex', width: '200px' }}>
+                <h2 className='pb-3 pr-2' style={{ color: '#eb6864' }}>Your Progress</h2>
+                <LinkContainer to={`/updateprogress/${jobId}`}><i className='fas fa-edit pt-3'></i></LinkContainer>
+              </div>
+
+              <Table style={{ paddingLeft: '70px' }}>
                 <thead className='text-center'>
                   <tr>
                     <td>Applied</td>
@@ -134,7 +142,10 @@ const JobDetailsScreen = ({ history, match }) => {
 
           <Row>
             <Col className='pl-4'>
-              <h2 style={{ color: '#eb6864' }}>Your Notes</h2>
+              <div className="edit pb-2" style={{ display: 'flex', width: '200px' }}>
+                <h2 className='pb-3 pr-2' style={{ color: '#eb6864' }}>Your Notes</h2>
+                <LinkContainer to={`/addnotes/${jobId}`}><i className='fas fa-edit pt-3'></i></LinkContainer>
+              </div>
               <p className='px-3'>No Notes at the moment!</p>
             </Col>
           </Row>
