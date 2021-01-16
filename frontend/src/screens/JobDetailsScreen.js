@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Container, Row, Col, Table } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -30,39 +31,57 @@ const JobDetailsScreen = ({ history, match }) => {
     }
   }, [userInfo, history, dispatch, jobId])
 
-  // local method
+  // local methods
+  // method to mark job as important
 
   return (
     <>
       <Link to='/myjobs' className='px-4'><i className="fas fa-arrow-left" style={{ height: '20px', width: '20px' }}></i>GO BACK</Link>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
-      {details && console.log(details.jobTitle)}
 
       {details && (
         <Container className='py-3 px-5'>
           <Row>
             <Col>
-              <h1 style={{ fontSize: '50px' }}>{details.jobTitle}</h1>
-              <p>Job Id: {details.companyJobId} </p>
+              <div className='align-items-center' style={{ display: 'flex', margin: '0' }}>
+                <h1 style={{ fontSize: '50px', paddingRight: '13px' }}>{details.jobTitle}</h1>
+                <i className="far fa-star " style={{ paddingTop: '11px', cursor: 'pointer' }}></i>
+              </div>
+              <p className='pl-2' style={{ fontSize: '14px' }}>Job Id: {details.companyJobId} </p>
             </Col>
           </Row>
           <Row>
-            <Col>
-              <h2 className='pb-2' style={{ color: '#eb6864' }}>Details</h2>
-              <h6 className='pl-2'>Company</h6>
+            <Col className='pl-4'>
+              {/* this is the header for details */}
+              <div className="edit pb-2" style={{ display: 'flex', width: '115px' }}>
+                <h2 className='pr-2' style={{ color: '#eb6864' }}>Details</h2>
+                <LinkContainer to={`/updatejob/${jobId}`}><i className='fas fa-edit pt-3'></i></LinkContainer>
+              </div>
+
+              {/* This is for company */}
+              <h6 className='pl-2 pr-2'>Company</h6>
               <p className='px-3'>{details.companyName}</p>
-              <h6 className='pl-2'>Location:</h6>
+
+              {/* this is for location */}
+
+              <h6 className='pl-2 pr-2'>Location</h6>
               <p className='px-3'>{details.jobCity}, {details.jobState}, {details.jobCountry}</p>
-              <h6 className='pl-2'>Job URL:</h6>
+
+              {/* this is for job url */}
+
+              <h6 className='pl-2 pr-2'>Job URL</h6>
               <p className='px-3'> <a href={details.jobUrl}>{details.jobUrl}</a></p>
-              <h6 className='pl-2'>Job Description:</h6>
+
+              {/* this is for job description */}
+
+              <h6 className='pl-2 pr-2'>Description</h6>
               <p className='px-3'>{details.jobDescription}</p>
             </Col>
           </Row>
 
           <Row>
-            <Col>
+            <Col className='pl-4'>
               <h2 className='pb-3' style={{ color: '#eb6864' }}>Your Progress</h2>
               <Table >
                 <thead className='text-center'>
@@ -114,12 +133,12 @@ const JobDetailsScreen = ({ history, match }) => {
           </Row>
 
           <Row>
-            <Col>
+            <Col className='pl-4'>
               <h2 style={{ color: '#eb6864' }}>Your Notes</h2>
               <p className='px-3'>No Notes at the moment!</p>
             </Col>
           </Row>
-        </Container>
+        </Container >
       )}
 
     </>

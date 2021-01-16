@@ -7,7 +7,10 @@ import {
   JOB_CREATE_REQUEST,
   JOB_DETAILS_FAIL,
   JOB_DETAILS_SUCCESS,
-  JOB_DETAILS_REQUEST
+  JOB_DETAILS_REQUEST,
+  JOB_UPDATE_FAIL,
+  JOB_UPDATE_SUCCESS,
+  JOB_UPDATE_REQUEST
 } from '../constants/JobConstants'
 
 import axios from 'axios'
@@ -106,6 +109,51 @@ export const getJobDetails = (id) => async (dispatch, getState) => {
     dispatch({
       type: JOB_DETAILS_FAIL,
       payload: error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    })
+  }
+}
+
+export const updateJob = (id, jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: JOB_UPDATE_REQUEST
+    })
+
+    const { userLogin: { userInfo } } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userInfo.token}`,
+      }
+    }
+
+    const { data } = await axios.put(`/api/jobs/${id}`, {
+      jobTitle,
+      jobUrl,
+      jobDescription,
+      companyJobId,
+      companyName,
+      jobCity,
+      jobState,
+      jobCountry
+    }, config)
+
+    dispatch({
+      type: JOB_UPDATE_SUCCESS
+    })
+
+    dispatch({
+      type: JOB_DETAILS_SUCCESS,
+      payload: data
+    })
+
+  } catch (error) {
+    dispatch({
+      type: JOB_UPDATE_FAIL,
+      error: error.response && error.response.data.message
         ? error.response.data.message
         : error.message
     })

@@ -10,7 +10,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
   userJobsReducer,
   createJobReducer,
-  jobDetailsReducer
+  jobDetailsReducer,
+  jobUpdateReducer
 } from './reducers/JobReducers'
 import {
   userLoginReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   userJobs: userJobsReducer,
   createJob: createJobReducer,
   jobDetails: jobDetailsReducer,
+  jobUpdate: jobUpdateReducer,
 })
 
 // Local storage things

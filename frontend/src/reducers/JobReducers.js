@@ -7,7 +7,10 @@ import {
   JOB_CREATE_SUCCESS,
   JOB_DETAILS_FAIL,
   JOB_DETAILS_REQUEST,
-  JOB_DETAILS_SUCCESS
+  JOB_DETAILS_SUCCESS,
+  JOB_UPDATE_FAIL,
+  JOB_UPDATE_REQUEST,
+  JOB_UPDATE_SUCCESS
 } from '../constants/JobConstants'
 
 export const userJobsReducer = (state = { jobs: [] }, action) => {
@@ -43,6 +46,19 @@ export const jobDetailsReducer = (state = {}, action) => {
     case JOB_DETAILS_SUCCESS:
       return { loading: false, jobDetails: action.payload }
     case JOB_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const jobUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case JOB_UPDATE_REQUEST:
+      return { loading: true }
+    case JOB_UPDATE_SUCCESS:
+      return { loading: false }
+    case JOB_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     default:
       return state

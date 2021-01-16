@@ -17,3 +17,19 @@ main {
   font-size: 14.5px;
 }
 
+.edit i{
+  visibility: hidden;
+  height: 15px;
+  width: 15px;
+}
+
+.edit:hover i{
+  visibility: visible;
+  cursor: pointer;
+}
+
+.edit .fas{
+  transform: scale(.9,.9);
+}
+
+
