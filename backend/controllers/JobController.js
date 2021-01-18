@@ -79,10 +79,7 @@ const updateJob = asyncHandler(async (req, res) => {
     notes
   } = req.body
 
-  console.log(hasApplied, heardBack, haveInterviewed, haveOffer)
-
   if (job) {
-    console.log('goes here')
     // assign new values or use old values if no new values
     job.jobTitle = jobTitle
     job.jobDescription = jobDescription

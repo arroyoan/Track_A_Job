@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { Link } from 'react-router-dom'
+import { JOB_CREATE_RESET } from '../constants/JobConstants'
 
 
 const AddJobScreen = ({ history }) => {
@@ -27,14 +28,21 @@ const AddJobScreen = ({ history }) => {
   const { userInfo } = userLogin
 
   const createJob = useSelector(state => state.createJob)
-  const { loading, error } = createJob
+  const { loading, error, success } = createJob
 
   // useEffect hook 
   useEffect(() => {
     if (!userInfo) {
       history.push('/login')
     }
-  }, [history, userInfo])
+
+    if (success) {
+      dispatch({
+        type: JOB_CREATE_RESET
+      })
+      history.push('/myjobs')
+    }
+  }, [history, userInfo, success, dispatch])
 
   // local methods if needed
   const onSubmitHandler = (e) => {

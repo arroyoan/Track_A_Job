@@ -11,6 +11,7 @@ import AddJobScreen from './screens/AddJobScreen'
 import JobDetailsScreen from './screens/JobDetailsScreen'
 import UpdateJobScreen from './screens/UpdateJobScreen'
 import UpdateProgressionScreen from './screens/UpdateProgressionScreen'
+import UpdateNotesScreen from './screens/UpdateNotesScreen'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" component={RegisterScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/addjob" component={AddJobScreen} />
+          <Route path="/addnotes/:id" component={UpdateNotesScreen} />
           <Route path="/updateprogress/:id" component={UpdateProgressionScreen} />
           <Route path="/updatejob/:id" component={UpdateJobScreen} />
           <Route path="/myjobs/:id" component={JobDetailsScreen} exact />

@@ -5,15 +5,17 @@ import {
   JOB_CREATE_FAIL,
   JOB_CREATE_REQUEST,
   JOB_CREATE_SUCCESS,
+  JOB_CREATE_RESET,
   JOB_DETAILS_FAIL,
   JOB_DETAILS_REQUEST,
   JOB_DETAILS_SUCCESS,
   JOB_UPDATE_FAIL,
   JOB_UPDATE_REQUEST,
   JOB_UPDATE_SUCCESS,
-  JOB_UPDATE_PROGRESS_FAIL,
-  JOB_UPDATE_PROGRESS_REQUEST,
-  JOB_UPDATE_PROGRESS_SUCCESS
+  JOB_DELETE_FAIL,
+  JOB_DELETE_REQUEST,
+  JOB_DELETE_SUCCESS,
+  JOB_DELETE_RESET
 } from '../constants/JobConstants'
 
 export const userJobsReducer = (state = { jobs: [] }, action) => {
@@ -34,9 +36,11 @@ export const createJobReducer = (state = { success: false }, action) => {
     case JOB_CREATE_REQUEST:
       return { loading: true }
     case JOB_CREATE_SUCCESS:
-      return { loading: false }
+      return { loading: false, success: true }
     case JOB_CREATE_FAIL:
       return { loading: false, error: action.payload }
+    case JOB_CREATE_RESET:
+      return {}
     default:
       return state;
   }
@@ -63,6 +67,21 @@ export const jobUpdateReducer = (state = {}, action) => {
       return { loading: false }
     case JOB_UPDATE_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const jobDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case JOB_DELETE_REQUEST:
+      return { loading: true }
+    case JOB_DELETE_SUCCESS:
+      return { loading: false, success: true }
+    case JOB_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    case JOB_DELETE_RESET:
+      return {}
     default:
       return state
   }

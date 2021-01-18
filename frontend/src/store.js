@@ -12,7 +12,7 @@ import {
   createJobReducer,
   jobDetailsReducer,
   jobUpdateReducer,
-  jobProgressReducer
+  jobDeleteReducer
 } from './reducers/JobReducers'
 import {
   userLoginReducer,
@@ -27,6 +27,7 @@ const reducer = combineReducers({
   createJob: createJobReducer,
   jobDetails: jobDetailsReducer,
   jobUpdate: jobUpdateReducer,
+  jobDelete: jobDeleteReducer,
 })
 
 // Local storage things

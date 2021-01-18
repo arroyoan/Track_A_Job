@@ -9,16 +9,13 @@ import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 
-const UpdateProgressionScreen = ({ history, match }) => {
+const UpdateNotesScreen = ({ match, history }) => {
   const jobId = match.params.id
 
   const dispatch = useDispatch()
 
   // useState hook here
-  const [hasApplied, setApplied] = useState(false)
-  const [heardBack, setHeardBack] = useState(false)
-  const [haveInterviewed, setHaveInterviewed] = useState(false)
-  const [haveOffer, setHaveOffer] = useState(false)
+  const [notes, setNotes] = useState('Please add some notes!')
 
   // redux state functionality
   const userLogin = useSelector(state => state.userLogin)
@@ -36,11 +33,8 @@ const UpdateProgressionScreen = ({ history, match }) => {
     if (!userInfo) {
       history.push('/login')
     }
-    if (details) {
-      setApplied(details.hasApplied)
-      setHeardBack(details.heardBack)
-      setHaveInterviewed(details.haveInterviewed)
-      setHaveOffer(details.haveOffer)
+    if (details && details.notes) {
+      setNotes(details.notes)
     }
   }, [history, userInfo, details])
 
@@ -48,7 +42,7 @@ const UpdateProgressionScreen = ({ history, match }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault()
     // Dispatch jobProgress update here
-    console.log('[updateprogressScreen] it is in submit handler')
+    console.log('[updatenotes] it is in submit handler')
     dispatch(updateJob(
       jobId,
       details.jobTitle,
@@ -60,11 +54,12 @@ const UpdateProgressionScreen = ({ history, match }) => {
       details.jobState,
       details.jobCountry,
       details.isImportant,
-      hasApplied,
-      heardBack,
-      haveInterviewed,
-      haveOffer,
-      details.notes
+      details.isImportant,
+      details.hasApplied,
+      details.heardBack,
+      details.haveInterviewed,
+      details.haveOffer,
+      notes
     ))
     history.push(`/myjobs/${jobId}`)
   }
@@ -74,7 +69,6 @@ const UpdateProgressionScreen = ({ history, match }) => {
       <Link to={`/myjobs/${jobId}`} className='px-4'><i className="fas fa-arrow-left" style={{ height: '20px', width: '20px' }}></i>GO BACK</Link>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
-      {details && console.log(hasApplied, heardBack, haveInterviewed, haveOffer)}
       {details && (
         <FormContainer>
           <div style={{ background: '', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -82,31 +76,11 @@ const UpdateProgressionScreen = ({ history, match }) => {
             <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '250px' }} onSubmit={onSubmitHandler}>
               <Form.Group style={{ display: 'flex', background: '', justifyContent: 'space-between', alignItems: 'center', width: '200px' }}>
                 <Form.Label style={{ background: '' }}> <h3>Applied</h3> </Form.Label>
-                <Form.Check
-                  checked={hasApplied}
-                  onChange={() => setApplied(!hasApplied)}
-                ></Form.Check>
-              </Form.Group>
-              <Form.Group style={{ display: 'flex', background: '', justifyContent: 'space-between', alignItems: 'center', width: '200px' }}>
-                <Form.Label style={{ background: '' }}> <h3>Contacted</h3> </Form.Label>
-                <Form.Check
-                  checked={heardBack}
-                  onChange={() => setHeardBack(!heardBack)}
-                ></Form.Check>
-              </Form.Group>
-              <Form.Group style={{ display: 'flex', background: '', justifyContent: 'space-between', alignItems: 'center', width: '200px' }}>
-                <Form.Label style={{ background: '' }}> <h3>Interviewed</h3> </Form.Label>
-                <Form.Check
-                  checked={haveInterviewed}
-                  onChange={() => setHaveInterviewed(!haveInterviewed)}
-                ></Form.Check>
-              </Form.Group>
-              <Form.Group style={{ display: 'flex', background: '', justifyContent: 'space-between', alignItems: 'center', width: '200px' }}>
-                <Form.Label style={{ background: '' }}> <h3>Offer</h3> </Form.Label>
-                <Form.Check
-                  checked={haveOffer}
-                  onChange={() => setHaveOffer(!haveOffer)}
-                ></Form.Check>
+                <Form.Control
+                  as='textarea'
+                  rows={4}
+                  value={notes}
+                ></Form.Control>
               </Form.Group>
               <Button type='submit' variant='dark' block>Save</Button>
             </Form>
@@ -114,9 +88,8 @@ const UpdateProgressionScreen = ({ history, match }) => {
 
         </FormContainer>
       )}
-
     </>
   )
 }
 
-export default UpdateProgressionScreen
+export default UpdateNotesScreen
