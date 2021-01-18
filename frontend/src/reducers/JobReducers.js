@@ -2,6 +2,7 @@ import {
   JOB_USERS_FAIL,
   JOB_USERS_REQUEST,
   JOB_USERS_SUCCESS,
+  JOB_USERS_RESET,
   JOB_CREATE_FAIL,
   JOB_CREATE_REQUEST,
   JOB_CREATE_SUCCESS,
@@ -9,6 +10,7 @@ import {
   JOB_DETAILS_FAIL,
   JOB_DETAILS_REQUEST,
   JOB_DETAILS_SUCCESS,
+  JOB_DETAILS_RESET,
   JOB_UPDATE_FAIL,
   JOB_UPDATE_REQUEST,
   JOB_UPDATE_SUCCESS,
@@ -26,6 +28,8 @@ export const userJobsReducer = (state = { jobs: [] }, action) => {
       return { loading: false, jobs: action.payload }
     case JOB_USERS_FAIL:
       return { loading: false, error: action.payload }
+    case JOB_USERS_RESET:
+      return {}
     default:
       return state
   }
@@ -54,6 +58,8 @@ export const jobDetailsReducer = (state = {}, action) => {
       return { loading: false, jobDetails: action.payload }
     case JOB_DETAILS_FAIL:
       return { loading: false, error: action.payload }
+    case JOB_DETAILS_RESET:
+      return {}
     default:
       return state
   }

@@ -9,6 +9,8 @@ import {
   USER_REGISTER_RESET
 } from '../constants/UserConstants'
 
+import { JOB_DETAILS_RESET, JOB_USERS_RESET } from '../constants/JobConstants'
+
 import axios from 'axios'
 
 export const login = (email, password) => (async (dispatch) => {
@@ -48,6 +50,8 @@ export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
   dispatch({ type: USER_REGISTER_RESET })
+  dispatch({ type: JOB_DETAILS_RESET })
+  dispatch({ type: JOB_USERS_RESET })
 }
 
 export const register = (email, username, password) => async (dispatch) => {

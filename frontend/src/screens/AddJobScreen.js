@@ -49,7 +49,6 @@ const AddJobScreen = ({ history }) => {
     e.preventDefault()
     // dispatch createJob action here
     dispatch(newJob(jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry))
-    history.push('/myjobs')
   }
 
   return (
