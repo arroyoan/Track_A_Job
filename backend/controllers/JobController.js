@@ -75,24 +75,29 @@ const updateJob = asyncHandler(async (req, res) => {
     hasApplied,
     heardBack,
     haveInterviewed,
-    haveOffer
+    haveOffer,
+    notes
   } = req.body
 
+  console.log(hasApplied, heardBack, haveInterviewed, haveOffer)
+
   if (job) {
+    console.log('goes here')
     // assign new values or use old values if no new values
-    job.jobTitle = jobTitle || job.jobTitle
-    job.jobDescription = jobDescription || job.jobDescription
-    job.companyJobId = companyJobId || job.companyJobId
-    job.companyName = companyName || job.companyName
-    job.jobUrl = jobUrl || job.jobUrl
-    job.jobCity = jobCity || job.jobCity
-    job.jobState = jobState || job.jobState
-    job.jobCountry = jobCountry || job.jobCountry
-    job.isImportant = isImportant || job.isImportant
-    job.hasApplied = hasApplied || job.hasApplied
-    job.heardBack = heardBack || job.heardBack
-    job.haveInterviewed = haveInterviewed || job.haveInterviewed
-    job.haveOffer = haveOffer || job.haveOffer
+    job.jobTitle = jobTitle
+    job.jobDescription = jobDescription
+    job.companyJobId = companyJobId
+    job.companyName = companyName
+    job.jobUrl = jobUrl
+    job.jobCity = jobCity
+    job.jobState = jobState
+    job.jobCountry = jobCountry
+    job.isImportant = isImportant
+    job.hasApplied = hasApplied
+    job.heardBack = heardBack
+    job.haveInterviewed = haveInterviewed
+    job.haveOffer = haveOffer
+    job.notes = notes
 
     // update the job in the database
     const updatedJob = await job.save()

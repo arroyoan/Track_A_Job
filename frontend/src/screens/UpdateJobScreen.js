@@ -57,7 +57,23 @@ const UpdateJobScreen = ({ history, match }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault()
     // dispatch createJob action here
-    dispatch(updateJob(jobId, jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry))
+    dispatch(updateJob(
+      jobId,
+      jobTitle,
+      jobUrl,
+      jobDescription,
+      companyJobId,
+      companyName,
+      jobCity,
+      jobState,
+      jobCountry,
+      details.isImportant,
+      details.hasApplied,
+      details.heardBack,
+      details.haveInterviewed,
+      details.haveOffer,
+      details.notes
+    ))
     history.push(`/myjobs/${jobId}`)
   }
 

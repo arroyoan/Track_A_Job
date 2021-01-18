@@ -98,7 +98,6 @@ const JobDetailsScreen = ({ history, match }) => {
                     <td>Contacted</td>
                     <td>Interviewed</td>
                     <td>Offer</td>
-                    <td>Hired!</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -111,28 +110,25 @@ const JobDetailsScreen = ({ history, match }) => {
                         )}
                     </td>
                     <td className='align-middle text-center'>
-                      {details.hasHeardBack ? (
+                      {details.heardBack ? (
                         <i className='fas fa-check' style={{ color: 'green' }}></i>
                       ) : (
                           <i className='fas fa-times' style={{ color: 'red' }}></i>
                         )}
                     </td>
                     <td className='align-middle text-center'>
-                      {details.hasInterview ? (
+                      {details.haveInterviewed ? (
                         <i className='fas fa-check' style={{ color: 'green' }}></i>
                       ) : (
                           <i className='fas fa-times' style={{ color: 'red' }}></i>
                         )}
                     </td>
                     <td className='align-middle text-center'>
-                      {details.hasOffer ? (
+                      {details.haveOffer ? (
                         <i className='fas fa-check' style={{ color: 'green' }}></i>
                       ) : (
                           <i className='fas fa-times' style={{ color: 'red' }}></i>
                         )}
-                    </td>
-                    <td className='align-middle text-center'>
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
                     </td>
                   </tr>
                 </tbody>

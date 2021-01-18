@@ -75,14 +75,14 @@ const HomeScreen = ({ history, location }) => {
                             )}
                         </td>
                         <td className='align-middle text-center'>
-                          {job.hasInterviewed ? (
+                          {job.haveInterviewed ? (
                             <i className='fas fa-check' style={{ color: 'green' }}></i>
                           ) : (
                               <i className='fas fa-times' style={{ color: 'red' }}></i>
                             )}
                         </td>
                         <td className='align-middle text-center'>
-                          {job.hasoffer ? (
+                          {job.haveOffer ? (
                             <i className='fas fa-check' style={{ color: 'green' }}></i>
                           ) : (
                               <i className='fas fa-times' style={{ color: 'red' }}></i>

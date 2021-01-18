@@ -115,7 +115,23 @@ export const getJobDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-export const updateJob = (id, jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry) => async (dispatch, getState) => {
+export const updateJob = (
+  id,
+  jobTitle,
+  jobUrl,
+  jobDescription,
+  companyJobId,
+  companyName,
+  jobCity,
+  jobState,
+  jobCountry,
+  isImportant,
+  hasApplied,
+  heardBack,
+  haveInterviewed,
+  haveOffer,
+  notes
+) => async (dispatch, getState) => {
   try {
     dispatch({
       type: JOB_UPDATE_REQUEST
@@ -138,7 +154,13 @@ export const updateJob = (id, jobTitle, jobUrl, jobDescription, companyJobId, co
       companyName,
       jobCity,
       jobState,
-      jobCountry
+      jobCountry,
+      isImportant,
+      hasApplied,
+      heardBack,
+      haveInterviewed,
+      haveOffer,
+      notes
     }, config)
 
     dispatch({

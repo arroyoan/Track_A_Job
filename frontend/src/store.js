@@ -11,7 +11,8 @@ import {
   userJobsReducer,
   createJobReducer,
   jobDetailsReducer,
-  jobUpdateReducer
+  jobUpdateReducer,
+  jobProgressReducer
 } from './reducers/JobReducers'
 import {
   userLoginReducer,

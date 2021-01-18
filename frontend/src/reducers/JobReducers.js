@@ -10,7 +10,10 @@ import {
   JOB_DETAILS_SUCCESS,
   JOB_UPDATE_FAIL,
   JOB_UPDATE_REQUEST,
-  JOB_UPDATE_SUCCESS
+  JOB_UPDATE_SUCCESS,
+  JOB_UPDATE_PROGRESS_FAIL,
+  JOB_UPDATE_PROGRESS_REQUEST,
+  JOB_UPDATE_PROGRESS_SUCCESS
 } from '../constants/JobConstants'
 
 export const userJobsReducer = (state = { jobs: [] }, action) => {
