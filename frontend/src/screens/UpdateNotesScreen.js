@@ -54,7 +54,6 @@ const UpdateNotesScreen = ({ match, history }) => {
       details.jobState,
       details.jobCountry,
       details.isImportant,
-      details.isImportant,
       details.hasApplied,
       details.heardBack,
       details.haveInterviewed,
@@ -71,21 +70,19 @@ const UpdateNotesScreen = ({ match, history }) => {
       {loading && <Loader />}
       {details && (
         <FormContainer>
-          <div style={{ background: '', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <h1 className='pb-3'>Update Job Progress</h1>
-            <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '250px' }} onSubmit={onSubmitHandler}>
-              <Form.Group style={{ display: 'flex', background: '', justifyContent: 'space-between', alignItems: 'center', width: '200px' }}>
-                <Form.Label style={{ background: '' }}> <h3>Applied</h3> </Form.Label>
-                <Form.Control
-                  as='textarea'
-                  rows={4}
-                  value={notes}
-                ></Form.Control>
-              </Form.Group>
-              <Button type='submit' variant='dark' block>Save</Button>
-            </Form>
-          </div>
-
+          <h1 className='pb-3'>Update Notes</h1>
+          <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white' }} onSubmit={onSubmitHandler}>
+            <Form.Group >
+              <Form.Label style={{ color: 'white' }}><h3>Your Notes</h3> </Form.Label>
+              <Form.Control
+                as='textarea'
+                rows={4}
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Button type='submit' variant='dark' block>Save</Button>
+          </Form>
         </FormContainer>
       )}
     </>

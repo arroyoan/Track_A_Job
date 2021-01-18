@@ -185,7 +185,12 @@ const JobDetailsScreen = ({ history, match }) => {
                 <h2 className='pb-2 pr-2' style={{ color: '#eb6864' }}>Your Notes</h2>
                 <LinkContainer to={`/addnotes/${jobId}`}><i className='fas fa-edit pt-3'></i></LinkContainer>
               </div>
-              <p className='px-3'>No Notes at the moment!</p>
+              {details.notes ? (
+                <p className='px-3'>{details.notes}</p>
+              ) : (
+                  <p className='px-3'>No Notes at the moment!</p>
+                )}
+
             </Col>
           </Row>
 

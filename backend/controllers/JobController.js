@@ -114,7 +114,8 @@ const updateJob = asyncHandler(async (req, res) => {
       hasApplied: updatedJob.hasApplied,
       heardBack: updatedJob.heardBack,
       haveInterviewed: updatedJob.haveInterviewed,
-      haveOffer: updatedJob.haveOffer
+      haveOffer: updatedJob.haveOffer,
+      notes: updatedJob.notes
     })
   } else {
     res.status(404)
