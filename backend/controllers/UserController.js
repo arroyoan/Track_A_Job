@@ -34,7 +34,6 @@ const getSingleUser = asyncHandler(async (req, res) => {
 // @access  Private
 const updateProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)
-
   if (user) {
     // assigns new value if there or keeps old if not
     user.username = req.body.username || user.username
@@ -43,7 +42,12 @@ const updateProfile = asyncHandler(async (req, res) => {
     // must check if submitted new password and do not want to assign user.password
     // this would change the users password to be the hash value and we dont want that here haha
     if (req.body.password) {
-      user.password = req.body.password
+      if (await user.comparePasswords(req.body.oldPassword)) {
+        user.password = req.body.password
+      } else {
+        res.status(400)
+        throw new Error('Old Password is incorrect')
+      }
     }
     const updatedUser = await user.save()
 

@@ -16,13 +16,17 @@ import {
 } from './reducers/JobReducers'
 import {
   userLoginReducer,
-  userRegisterReducer
+  userRegisterReducer,
+  userDetailsReducer,
+  userUpdateReducer
 } from './reducers/UserReducers'
 
 // reducers to combined here
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
+  userUpdate: userUpdateReducer,
   userJobs: userJobsReducer,
   createJob: createJobReducer,
   jobDetails: jobDetailsReducer,

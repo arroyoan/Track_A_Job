@@ -12,6 +12,7 @@ import JobDetailsScreen from './screens/JobDetailsScreen'
 import UpdateJobScreen from './screens/UpdateJobScreen'
 import UpdateProgressionScreen from './screens/UpdateProgressionScreen'
 import UpdateNotesScreen from './screens/UpdateNotesScreen'
+import MyProfileScreen from './screens/MyProfileScreen'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/updatejob/:id" component={UpdateJobScreen} />
           <Route path="/myjobs/:id" component={JobDetailsScreen} exact />
           <Route path="/myjobs" component={HomeScreen} exact />
+          <Route path="/profile" component={MyProfileScreen} />
           <Route exact path='/'><Redirect to='/myjobs' /></Route>
         </Container>
       </main>
