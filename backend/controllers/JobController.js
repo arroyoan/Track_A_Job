@@ -13,8 +13,19 @@ const getJobs = asyncHandler(async (req, res) => {
 // @route   GET /api/jobs/myjobs
 // @access  Private
 const getUserJobs = asyncHandler(async (req, res) => {
-  const jobs = await Job.find({ user: req.user._id })
-  res.json(jobs)
+  // this is the number of job apps to be displayed at a time
+  const pageSize = Number(req.query.pageSize) || 10
+
+  // 
+  const page = Number(req.query.pageNumber) || 1
+
+  // counts the total amount of job applications
+  const count = await Job.countDocuments({ user: req.user._id })
+  const jobs = await Job.find({ user: req.user._id }).limit(pageSize).skip(pageSize * (page - 1))
+
+  const pages = Math.ceil(count / pageSize)
+
+  res.json({ jobs, page, pages })
 })
 
 // @desc    GET a single job

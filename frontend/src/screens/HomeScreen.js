@@ -6,14 +6,20 @@ import { Link } from 'react-router-dom'
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Paginate from '../components/Paginate'
 import { getUserJobs } from '../actions/JobActions'
 
-const HomeScreen = ({ history, location }) => {
+const HomeScreen = ({ history, match }) => {
   const dispatch = useDispatch()
+
+  // gonna be match params for keywords for when i do search
+
+  // gets page number from url if there is one
+  const pageNumber = match.params.pageNumber || 1
 
   // Get state from store
   const userJobs = useSelector(state => state.userJobs)
-  const { loading, error, jobs } = userJobs
+  const { loading, error, jobs, page, pages } = userJobs
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -21,12 +27,12 @@ const HomeScreen = ({ history, location }) => {
   //useEffect hoook stuff
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserJobs())
+      dispatch(getUserJobs(pageNumber))
     } else {
       history.push('/login')
     }
 
-  }, [dispatch, userInfo, history])
+  }, [dispatch, userInfo, history, pageNumber])
 
   // local methods
 
@@ -47,7 +53,7 @@ const HomeScreen = ({ history, location }) => {
 
         ) : (
           <>
-            <Table striped hover bordered responsive>
+            <Table size='sm' striped hover bordered responsive>
               <thead style={{ background: '#eb6864', color: 'white' }}>
                 <tr className='text-center'>
                   <th> <strong>Job</strong></th>
@@ -97,7 +103,9 @@ const HomeScreen = ({ history, location }) => {
                 }
               </tbody>
             </Table>
-            <h1 className='align-middle text-center'>Pagination</h1>
+            <div className='pt-3' style={{ background: '', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Paginate pages={pages} page={page} />
+            </div>
           </>
         )}
     </>

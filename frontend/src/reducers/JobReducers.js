@@ -25,7 +25,12 @@ export const userJobsReducer = (state = { jobs: [] }, action) => {
     case JOB_USERS_REQUEST:
       return { loading: true }
     case JOB_USERS_SUCCESS:
-      return { loading: false, jobs: action.payload }
+      return {
+        loading: false,
+        jobs: action.payload.jobs,
+        page: action.payload.page,
+        pages: action.payload.pages
+      }
     case JOB_USERS_FAIL:
       return { loading: false, error: action.payload }
     case JOB_USERS_RESET:

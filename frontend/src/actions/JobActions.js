@@ -18,7 +18,7 @@ import {
 
 import axios from 'axios'
 
-export const getUserJobs = () => async (dispatch, getState) => {
+export const getUserJobs = (pageNumber = '') => async (dispatch, getState) => {
   try {
     dispatch({
       type: JOB_USERS_REQUEST
@@ -31,7 +31,7 @@ export const getUserJobs = () => async (dispatch, getState) => {
       }
     }
 
-    const { data } = await axios.get('/api/jobs/myjobs', config)
+    const { data } = await axios.get(`/api/jobs/myjobs?pageNumber=${pageNumber}`, config)
     dispatch({
       type: JOB_USERS_SUCCESS,
       payload: data
