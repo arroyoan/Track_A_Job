@@ -3,7 +3,6 @@ import { Pagination } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const Paginate = ({ page, pages, keyword = '' }) => {
-  console.log(page, pages)
   // it makes sure to that there is more than one page
   // bc if there is not then there is no reason to show pagination
   return pages > 1 && (

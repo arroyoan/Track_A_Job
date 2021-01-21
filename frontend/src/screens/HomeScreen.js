@@ -13,6 +13,7 @@ const HomeScreen = ({ history, match }) => {
   const dispatch = useDispatch()
 
   // gonna be match params for keywords for when i do search
+  const keywords = match.params.keywords || ''
 
   // gets page number from url if there is one
   const pageNumber = match.params.pageNumber || 1
@@ -27,12 +28,12 @@ const HomeScreen = ({ history, match }) => {
   //useEffect hoook stuff
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserJobs(pageNumber))
+      dispatch(getUserJobs(keywords, pageNumber))
     } else {
       history.push('/login')
     }
 
-  }, [dispatch, userInfo, history, pageNumber])
+  }, [dispatch, userInfo, history, pageNumber, keywords])
 
   // local methods
 

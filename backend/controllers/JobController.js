@@ -16,12 +16,35 @@ const getUserJobs = asyncHandler(async (req, res) => {
   // this is the number of job apps to be displayed at a time
   const pageSize = Number(req.query.pageSize) || 10
 
-  // 
+  //  this gets the current page number or makes it page 1 of nothing is in the query
   const page = Number(req.query.pageNumber) || 1
 
+  // search keywords
+  const keywords = req.query.keywords ? {
+    companyName: {
+      $regex: req.query.keywords,
+      $options: 'i'
+    }
+  } : {}
+
+  // sort type
+  const sortBy = req.query.sortBy || '-updatedAt'
+
   // counts the total amount of job applications
-  const count = await Job.countDocuments({ user: req.user._id })
-  const jobs = await Job.find({ user: req.user._id }).limit(pageSize).skip(pageSize * (page - 1))
+  const count = await Job.countDocuments({
+    $and: [{ user: req.user._id }, { ...keywords }]
+  })
+  console.log(count)
+
+  let results = Job.find({
+    $and: [{ user: req.user._id }, { ...keywords }]
+  })
+  //const jobs = await Job.find({ user: req.user._id }).limit(pageSize).skip(pageSize * (page - 1))
+  results = results.sort((sortBy))
+
+  results = results.limit(pageSize).skip(pageSize * (page - 1))
+
+  const jobs = await results
 
   const pages = Math.ceil(count / pageSize)
 
