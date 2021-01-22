@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
 import morgan from 'morgan'
+import path from 'path'
 import mongoSanitize from 'express-mongo-sanitize'
 
 import connectDB from './config/db.js'
@@ -31,9 +32,19 @@ app.use(mongoSanitize())
 app.use('/api/users', userRoutes)
 app.use('/api/jobs', jobRoutes)
 
+const __dirname = path.resolve()
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+}
+
 // custom error middleware
 app.use(notFound)
 app.use(errorHandler)
+
 
 // Gets port from .env but if no port found it goes to 5000
 const PORT = process.env.PORT || 5000
