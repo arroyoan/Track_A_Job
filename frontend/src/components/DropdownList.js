@@ -3,6 +3,7 @@ import { Dropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const DropdownList = ({ items, keywords, pageSize, pageNumber, sortBy, type }) => {
+  const sortNames = { 'updatedAt': 'Last Updated', 'isImportant': 'Important', 'hasApplied': 'Applied', 'haveInterviewed': 'Interviewed', 'haveOffer': 'Offer' }
 
   return (
     <Dropdown>
@@ -12,9 +13,10 @@ const DropdownList = ({ items, keywords, pageSize, pageNumber, sortBy, type }) =
           items.map((option) => {
             return (
               <LinkContainer
+                key={option}
                 to={keywords ? `/search/${keywords}/pageSize/${pageSize}/pageNumber/${pageNumber}/sort/${option}` : `/pageSize/${pageSize}/pageNumber/${pageNumber}/sort/${option}`}
               >
-                <Dropdown.Item>{option}</Dropdown.Item>
+                <Dropdown.Item>{sortNames[option]}</Dropdown.Item>
               </LinkContainer>
             )
           })
@@ -22,6 +24,7 @@ const DropdownList = ({ items, keywords, pageSize, pageNumber, sortBy, type }) =
             items.map((option) => {
               return (
                 <LinkContainer
+                  key={option}
                   to={keywords ? `/search/${keywords}/pageSize/${option}/pageNumber/${pageNumber}/sort/${sortBy}` : `/pageSize/${option}/pageNumber/${pageNumber}/sort/${sortBy}`}
                 >
                   <Dropdown.Item>{option}</Dropdown.Item>
