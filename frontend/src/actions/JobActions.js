@@ -18,7 +18,7 @@ import {
 
 import axios from 'axios'
 
-export const getUserJobs = (keywords = '', pageNumber = '') => async (dispatch, getState) => {
+export const getUserJobs = (keywords = '', pageNumber = '', sortBy = '', pageSize = '') => async (dispatch, getState) => {
   try {
     dispatch({
       type: JOB_USERS_REQUEST
@@ -31,7 +31,7 @@ export const getUserJobs = (keywords = '', pageNumber = '') => async (dispatch, 
       }
     }
 
-    const { data } = await axios.get(`/api/jobs/myjobs?pageNumber=${pageNumber}&keywords=${keywords}`, config)
+    const { data } = await axios.get(`/api/jobs/myjobs?pageNumber=${pageNumber}&keywords=${keywords}&sortBy=${sortBy}&pageSize=${pageSize}`, config)
 
     dispatch({
       type: JOB_USERS_SUCCESS,

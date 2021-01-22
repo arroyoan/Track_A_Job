@@ -27,14 +27,13 @@ const getUserJobs = asyncHandler(async (req, res) => {
     }
   } : {}
 
-  // sort type
-  const sortBy = req.query.sortBy || '-updatedAt'
+  // this gets the current sorting method or defaults to updatedAt
+  const sortBy = `-${req.query.sortBy || 'updatedAt'}`
 
   // counts the total amount of job applications
   const count = await Job.countDocuments({
     $and: [{ user: req.user._id }, { ...keywords }]
   })
-  console.log(count)
 
   let results = Job.find({
     $and: [{ user: req.user._id }, { ...keywords }]

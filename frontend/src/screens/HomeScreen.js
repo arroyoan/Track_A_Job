@@ -1,22 +1,33 @@
 import React, { useEffect } from 'react'
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-
+import { Link, Route } from 'react-router-dom'
 
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
+import SearchBar from '../components/SearchBar'
+import DropdownList from '../components/DropdownList'
 import { getUserJobs } from '../actions/JobActions'
 
 const HomeScreen = ({ history, match }) => {
   const dispatch = useDispatch()
+
+  // dropdown menue list of options
+  const pageItems = [5, 10, 25, 50]
+  const sortItems = ['updatedAt', 'isImportant', 'hasApplied', 'haveInterviewed', 'haveOffer']
 
   // gonna be match params for keywords for when i do search
   const keywords = match.params.keywords || ''
 
   // gets page number from url if there is one
   const pageNumber = match.params.pageNumber || 1
+
+  // get sort type from url
+  const sortBy = match.params.sortBy || 'updatedAt'
+
+  // get page size from url
+  const pageSize = match.params.pageSize || 10
 
   // Get state from store
   const userJobs = useSelector(state => state.userJobs)
@@ -28,20 +39,21 @@ const HomeScreen = ({ history, match }) => {
   //useEffect hoook stuff
   useEffect(() => {
     if (userInfo) {
-      dispatch(getUserJobs(keywords, pageNumber))
+      dispatch(getUserJobs(keywords, pageNumber, sortBy, pageSize))
     } else {
       history.push('/login')
     }
 
-  }, [dispatch, userInfo, history, pageNumber, keywords])
+  }, [dispatch, userInfo, history, pageNumber, keywords, sortBy, pageSize])
 
   // local methods
 
   return (
     <>
-      <div className='py-3 pr-1' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h4>Your Applications</h4>
-        <Link className='appButton' to='/addjob' >+ New App</Link>
+      <div className='py-3' style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center', background: '' }}>
+        <h4 style={{ background: '' }}>Your Applications</h4>
+        <Route render={({ history }) => <SearchBar history={history} pageSize={pageSize} sortBy={sortBy} pageNumber={pageNumber} />} />
+        <Link style={{ background: '' }} className='appButton' to='/addjob' >+ New App</Link>
       </div>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
@@ -60,6 +72,7 @@ const HomeScreen = ({ history, match }) => {
                   <th> <strong>Job</strong></th>
                   <th> <strong>Job Id</strong></th>
                   <th><strong>Company</strong></th>
+                  <th><strong>Important</strong></th>
                   <th><strong>Applied</strong></th>
                   <th><strong>Interviewed</strong></th>
                   <th><strong>Offer</strong></th>
@@ -74,6 +87,11 @@ const HomeScreen = ({ history, match }) => {
                         <td>{job.jobTitle}</td>
                         <td>{job.companyJobId}</td>
                         <td>{job.companyName}</td>
+                        <td className='align-middle text-center' >{job.isImportant ? (
+                          <i className="fas fa-star " style={{ color: 'goldenrod' }}></i>
+                        ) : (
+                            <i className="far fa-star "></i>
+                          )}</td>
                         <td className='align-middle text-center'>
                           {job.hasApplied ? (
                             <i className='fas fa-check' style={{ color: 'green' }}></i>
@@ -104,8 +122,10 @@ const HomeScreen = ({ history, match }) => {
                 }
               </tbody>
             </Table>
-            <div className='pt-3' style={{ background: '', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <Paginate pages={pages} page={page} />
+            <div className='pt-3' style={{ background: '', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <DropdownList items={pageItems} pageNumber={pageNumber} keywords={keywords} pageSize={pageSize} sortBy={sortBy} type={"Page Size"} />
+              <Paginate pages={pages} page={page} keywords={keywords} pageSize={pageSize} sortBy={sortBy} />
+              <DropdownList items={sortItems} pageNumber={pageNumber} keywords={keywords} pageSize={pageSize} sortBy={sortBy} type={"Sort"} />
             </div>
           </>
         )}

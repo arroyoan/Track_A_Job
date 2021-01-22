@@ -28,8 +28,8 @@ function App() {
           <Route path="/updateprogress/:id" component={UpdateProgressionScreen} />
           <Route path="/updatejob/:id" component={UpdateJobScreen} />
           <Route path="/myjobs/:id" component={JobDetailsScreen} exact />
-          <Route path="/page/:pageNumber" component={HomeScreen} exact />
-          <Route path="search/:keyword/page/:pageNumber" component={HomeScreen} exact />
+          <Route path="/search/:keywords/pageSize/:pageSize/pageNumber/:pageNumber/sort/:sortBy" component={HomeScreen} exact />
+          <Route path="/pageSize/:pageSize/pageNumber/:pageNumber/sort/:sortBy" component={HomeScreen} exact />
           <Route path="/myjobs" component={HomeScreen} exact />
           <Route path="/profile" component={MyProfileScreen} />
           <Route exact path='/'><Redirect to='/myjobs' /></Route>

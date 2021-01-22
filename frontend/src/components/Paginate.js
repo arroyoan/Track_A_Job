@@ -2,7 +2,7 @@ import React from 'react'
 import { Pagination } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-const Paginate = ({ page, pages, keyword = '' }) => {
+const Paginate = ({ page, pages, keywords = '', pageSize = 10, sortBy }) => {
   // it makes sure to that there is more than one page
   // bc if there is not then there is no reason to show pagination
   return pages > 1 && (
@@ -17,7 +17,7 @@ const Paginate = ({ page, pages, keyword = '' }) => {
       {([...Array(pages).keys()].map(pageNum => (
         <LinkContainer
           key={pageNum + 1}
-          to={keyword ? `/search/${keyword}/page/${pageNum + 1}` : `/page/${pageNum + 1}`} >
+          to={keywords ? `/search/${keywords}/pageSize/${pageSize}/pageNumber/${pageNum + 1}/sort/${sortBy}` : `/pageSize/${pageSize}/pageNumber/${pageNum + 1}/sort/${sortBy}`} >
           <Pagination.Item active={(pageNum + 1) === page} >{pageNum + 1}</Pagination.Item>
         </LinkContainer>
       ))
