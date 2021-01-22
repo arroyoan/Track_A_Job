@@ -25,7 +25,7 @@ const DropdownList = ({ items, keywords, pageSize, pageNumber, sortBy, type }) =
               return (
                 <LinkContainer
                   key={option}
-                  to={keywords ? `/search/${keywords}/pageSize/${option}/pageNumber/${pageNumber}/sort/${sortBy}` : `/pageSize/${option}/pageNumber/${pageNumber}/sort/${sortBy}`}
+                  to={keywords ? `/search/${keywords}/pageSize/${option}/pageNumber/${1}/sort/${sortBy}` : `/pageSize/${option}/pageNumber/${1}/sort/${sortBy}`}
                 >
                   <Dropdown.Item>{option}</Dropdown.Item>
                 </LinkContainer>
