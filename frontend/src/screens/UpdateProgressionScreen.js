@@ -48,7 +48,6 @@ const UpdateProgressionScreen = ({ history, match }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault()
     // Dispatch jobProgress update here
-    console.log('[updateprogressScreen] it is in submit handler')
     dispatch(updateJob(
       jobId,
       details.jobTitle,

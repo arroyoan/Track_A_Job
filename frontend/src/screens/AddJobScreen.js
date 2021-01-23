@@ -51,6 +51,13 @@ const AddJobScreen = ({ history }) => {
     dispatch(newJob(jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry))
   }
 
+  // This is to clear the success header if user updates profile
+  const clearHandler = () => {
+    dispatch({
+      type: JOB_CREATE_RESET
+    })
+  }
+
   let splitErr = ''
   if (error) {
     const subErr = error.substr(22)
@@ -59,7 +66,7 @@ const AddJobScreen = ({ history }) => {
 
   return (
     <>
-      <Link to='/myjobs' className='px-4'><i className="fas fa-arrow-left" style={{ height: '20px', width: '20px' }}></i>GO BACK</Link>
+      <Link to='/myjobs' className='px-4' onClick={clearHandler}><i className="fas fa-arrow-left" style={{ height: '20px', width: '20px' }}></i>GO BACK</Link>
       {error && (splitErr.map((msg) => <Message variant='danger' key={msg.split(':')[0]}>{msg.split(':')[1]}</Message>))}
       {loading && <Loader />}
 
@@ -163,7 +170,7 @@ const AddJobScreen = ({ history }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Button type='submit' variant='dark' block style={{ fontSize: '20px' }}>Submit</Button>
+            <Button type='submit' variant='dark' block style={{ fontSize: '20px' }}>Save Application</Button>
           </Form>
         </FormContainer>
       </div>
