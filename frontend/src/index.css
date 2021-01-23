@@ -18,7 +18,6 @@ main {
 }
 
 .edit i{
-  visibility: hidden;
   height: 15px;
   width: 15px;
 }
@@ -26,6 +25,8 @@ main {
 .edit:hover i{
   visibility: visible;
   cursor: pointer;
+  height: 15px;
+  width: 15px;
 }
 
 .edit .fas{

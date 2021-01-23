@@ -51,15 +51,21 @@ const AddJobScreen = ({ history }) => {
     dispatch(newJob(jobTitle, jobUrl, jobDescription, companyJobId, companyName, jobCity, jobState, jobCountry))
   }
 
+  let splitErr = ''
+  if (error) {
+    const subErr = error.substr(22)
+    splitErr = subErr.split(',')
+  }
+
   return (
     <>
       <Link to='/myjobs' className='px-4'><i className="fas fa-arrow-left" style={{ height: '20px', width: '20px' }}></i>GO BACK</Link>
-      {error && <Message variant='danger'>{error}</Message>}
+      {error && (splitErr.map((msg) => <Message variant='danger' key={msg.split(':')[0]}>{msg.split(':')[1]}</Message>))}
       {loading && <Loader />}
 
       <div className='pt-2 pb-4'>
         <FormContainer>
-          <h2 className='pb-2 px-2' style={{ color: 'black' }}>New Job Application</h2>
+          <h2 className='pb-2 px-2' style={{ color: 'black' }}>Add Job Application</h2>
           <Form className='py-4 px-3' style={{ background: '#eb6864', borderRadius: '25px', color: 'white' }} onSubmit={onSubmitHandler}>
             <Form.Row>
               <Col>

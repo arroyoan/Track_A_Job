@@ -23,19 +23,19 @@ const JobSchema = new mongoose.Schema({
       /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
       'Please add a valid URL with HTTP or HTTPS'
     ],
-    required: true
+    required: [true, 'Please Add a Job URL']
   },
   jobCity: {
     type: String,
-    required: true
+    required: [true, 'Please Add a Job City']
   },
   jobState: {
     type: String,
-    required: true
+    required: [true, 'Please Add a Job State']
   },
   jobCountry: {
     type: String,
-    required: true
+    required: [true, 'Please Add a Job Country']
   },
   isImportant: {
     type: Boolean,

@@ -15,7 +15,7 @@ const UpdateNotesScreen = ({ match, history }) => {
   const dispatch = useDispatch()
 
   // useState hook here
-  const [notes, setNotes] = useState('Please add some notes!')
+  const [notes, setNotes] = useState('')
 
   // redux state functionality
   const userLogin = useSelector(state => state.userLogin)
@@ -77,6 +77,7 @@ const UpdateNotesScreen = ({ match, history }) => {
               <Form.Control
                 as='textarea'
                 rows={4}
+                placeholder='Please add some notes!'
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               ></Form.Control>

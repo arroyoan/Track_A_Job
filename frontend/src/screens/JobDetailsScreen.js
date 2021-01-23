@@ -72,6 +72,14 @@ const JobDetailsScreen = ({ history, match }) => {
     }
   }
 
+  // creates last updated string
+  let dateInfo = ''
+  if (details) {
+    let substringDate = details.updatedAt.substring(0, 10)
+    dateInfo = substringDate.split('-')
+    dateInfo = `${dateInfo[1]}-${dateInfo[2]}-${dateInfo[0]}`
+  }
+
   return (
     <>
       <Link to='/myjobs' className='px-4'><i className="fas fa-arrow-left" style={{ height: '20px', width: '20px' }}></i>GO BACK</Link>
@@ -93,7 +101,8 @@ const JobDetailsScreen = ({ history, match }) => {
                     <i onClick={() => markImportantHandler()} className="far fa-star " style={{ paddingTop: '11px', cursor: 'pointer' }}></i>
                   )}
               </div>
-              <p className='pl-2' style={{ fontSize: '14px' }}>Job Id: {details.companyJobId} </p>
+              <p className='pl-2' style={{ fontSize: '14px', margin: '0px' }}>Job Id: {details.companyJobId} </p>
+              <p className='pl-2' style={{ fontSize: '14px' }}>Last Updated: {dateInfo} </p>
             </Col>
           </Row>
 
@@ -129,7 +138,7 @@ const JobDetailsScreen = ({ history, match }) => {
 
           <Row>
             <Col className='pl-4'>
-              <div className="edit pb-2" style={{ display: 'flex', width: '200px' }}>
+              <div className="edit pb-2" style={{ display: 'flex', width: '250px' }}>
                 <h2 className='pb-3 pr-2' style={{ color: '#eb6864' }}>Your Progress</h2>
                 <LinkContainer to={`/updateprogress/${jobId}`}><i className='fas fa-edit pt-3'></i></LinkContainer>
               </div>
