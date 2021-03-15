@@ -150,7 +150,7 @@ export const updateJob = (
       }
     }
 
-    const { data } = await axios.put(`/api/jobs/${id}`, {
+     await axios.put(`/api/jobs/${id}`, {
       jobTitle,
       jobUrl,
       jobDescription,
@@ -171,10 +171,10 @@ export const updateJob = (
       type: JOB_UPDATE_SUCCESS
     })
 
-    dispatch({
-      type: JOB_DETAILS_SUCCESS,
-      payload: data
-    })
+    // dispatch({
+    //   type: JOB_DETAILS_SUCCESS,
+    //   payload: data
+    // })
 
   } catch (error) {
     dispatch({

@@ -78,7 +78,7 @@ const RegisterScreen = ({ history }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          <Form.Text className='px-2' style={{ color: 'white' }}>Passwords must be at least 8 characters long</Form.Text>
+          <Form.Text className='px-2' style={{ color: 'white' }}>Passwords must be at least 8 characters</Form.Text>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">

@@ -26,6 +26,9 @@ const JobDetailsScreen = ({ history, match }) => {
   const jobDelete = useSelector(state => state.jobDelete)
   const { loading: deleteLoading, error: deleteError, success } = jobDelete
 
+  const jobUpdate = useSelector(state => state.jobUpdate)
+  const { loading: updateLoading, error: updateError } = jobUpdate
+
   // useEffect hook
   useEffect(() => {
     if (!userInfo) {
@@ -40,7 +43,8 @@ const JobDetailsScreen = ({ history, match }) => {
       })
       history.push('/myjobs')
     }
-  }, [userInfo, history, dispatch, jobId, success])
+
+  }, [userInfo, history, dispatch, jobId, success, updateLoading])
 
   // local methods
 
@@ -75,6 +79,7 @@ const JobDetailsScreen = ({ history, match }) => {
   // creates last updated string
   let dateInfo = ''
   if (details) {
+    console.log("This is job details",details)
     let substringDate = details.updatedAt.substring(0, 10)
     dateInfo = substringDate.split('-')
     dateInfo = `${dateInfo[1]}-${dateInfo[2]}-${dateInfo[0]}`
@@ -88,6 +93,8 @@ const JobDetailsScreen = ({ history, match }) => {
 
       {deleteError && <Message variant='danger'>{deleteError}</Message>}
       {deleteLoading && <Loader />}
+
+      {updateError && <Message variant='danger'>{updateError}</Message>}
 
       {details && (
         <Container className='py-3 px-5'>
